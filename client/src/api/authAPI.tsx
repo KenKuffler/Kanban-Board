@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { UserLogin } from "../interfaces/UserLogin";
 
-const API_URL = 'http://localhost:3001/auth/login'; // Adjust based on your server's URL
+// Set API URL based on environment
+const API_URL = import.meta.env.PROD
+  ? import.meta.env.VITE_API_URL_PRODUCTION
+  : import.meta.env.VITE_API_URL_LOCAL;
 
 // Function to log in the user
 const login = async (userInfo: UserLogin) => {
@@ -14,3 +17,5 @@ const login = async (userInfo: UserLogin) => {
 };
 
 export { login };
+
+
