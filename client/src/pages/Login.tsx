@@ -1,6 +1,6 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import Auth from '../utils/auth';
-import { login } from "../api/authAPI";
+import { login, LoginResponse } from "../api/authAPI";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -18,9 +18,9 @@ const Login = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    Auth.recordActivity(); // Record user activity here
+    Auth.recordActivity();
     try {
-      const data = await login(loginData);
+      const data: LoginResponse = await login(loginData);
       Auth.login(data.token);
     } catch (err) {
       console.error('Failed to login', err);
@@ -31,7 +31,7 @@ const Login = () => {
     <div className='container'>
       <form className='form' onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <label >Username</label>
+        <label>Username</label>
         <input 
           type='text'
           name='username'
@@ -52,3 +52,4 @@ const Login = () => {
 };
 
 export default Login;
+
