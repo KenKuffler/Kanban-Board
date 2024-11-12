@@ -26,6 +26,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET_KEY as string, { expiresIn: '1h' });
+    console.log("Generated Token:", token); // Debugging log to confirm token generation
     res.json({ token });
   } catch (error: any) {
     console.error('Login error:', error);
