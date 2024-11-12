@@ -14,10 +14,14 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // CORS configuration
-const allowedOrigins = [process.env.CLIENT_URL || 'http://localhost:3000'];
+// Allow requests only from your client’s origin
+const allowedOrigins = ['https://kanban-board-1-4b7g.onrender.com'];
+
 app.use(cors({
   origin: allowedOrigins,
-  credentials: true, // If using cookies or other credentials
+  credentials: true,
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  allowedHeaders: ['Content-Type'],
 }));
 
 // Serves static files in the entire client's dist folder
