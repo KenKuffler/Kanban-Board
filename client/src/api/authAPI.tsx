@@ -14,6 +14,7 @@ const login = async (userInfo: UserLogin): Promise<LoginResponse> => {
   try {
     const response = await axios.post(API_URL, userInfo);
     console.log("Server response:", response.data); // Inspect the response data
+    console.log("API Response:", response.data); // Debugging log to check server response
     return response.data as LoginResponse; // Explicitly define the response type
   } catch (error) {
     throw new Error('Failed to log in. Please check your credentials.');
