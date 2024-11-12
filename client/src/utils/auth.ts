@@ -62,9 +62,10 @@ recordActivity(message?: string) {
 
   // Log in the user by storing the token in localStorage, recording activity, and redirecting to the home page
   login(idToken: string) {
+    console.log("Storing token and redirecting:", idToken); // Log token before saving
     localStorage.setItem(TOKEN_KEY, idToken); // Store the token in localStorage
-    this.recordActivity(); // Record the login activity
-    window.location.assign('/'); // Redirect to the home page
+    this.recordActivity("User logged in"); // Record the login activity with a message
+    // window.location.assign('/'); // Redirect to the home page
   }
 
   // Log out the user by removing the token and activity timestamp from localStorage and redirecting to the login page
