@@ -4,6 +4,7 @@ import Auth from '../utils/auth';
 
 // Base URL setup using VITE_API_URL for both local and production environments
 const BASE_URL = import.meta.env.VITE_API_URL;
+console.log('BASE_URL:', BASE_URL);
 
 const retrieveTickets = async () => {
   try {
