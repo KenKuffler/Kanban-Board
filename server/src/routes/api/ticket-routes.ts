@@ -9,6 +9,12 @@ import {
 
 const router = express.Router();
 
+// Middleware to log each request to tickets routes
+router.use((req, _res, next) => {
+  console.log(`Ticket route accessed: ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 // GET /tickets - Get all tickets
 router.get('/', (req, res) => {
   console.log('Request received at GET /tickets');
