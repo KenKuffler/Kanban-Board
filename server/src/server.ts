@@ -4,10 +4,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-import path from 'path'; // To serve index.html
 import routes from './routes/index.js';
 import { sequelize } from './models/index.js';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Define __dirname for ES module scope
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 console.log('JWT_SECRET:', process.env.JWT_SECRET_KEY); // Debugging to confirm JWT_SECRET is loaded
 
@@ -26,7 +31,7 @@ app.use(
 );
 
 // Static serving for client build
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../../client/dist')));
 
 app.use(express.json());
 
