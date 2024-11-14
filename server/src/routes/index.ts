@@ -1,12 +1,15 @@
 import { Router } from 'express';
 import authRoutes from './auth-routes.js';
 import apiRoutes from './api/index.js';
-import { authenticateToken } from '../middleware/auth.js';
 
 const router = Router();
 
-// Use the authentication middleware for API routes
+// Expose authRoutes and apiRoutes separately for use in server.ts
 router.use('/auth', authRoutes);
-router.use('/api', authenticateToken, apiRoutes); // Protect API routes with authentication
+router.use('/api', apiRoutes);
 
-export default router;
+export default {
+  authRoutes: router, // Use this for auth setup in `server.ts`
+  apiRoutes: router,   // Use this for API setup in `server.ts`
+};
+

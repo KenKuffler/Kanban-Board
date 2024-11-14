@@ -3,13 +3,16 @@ import { User } from '../models/user.js';
 
 // GET /Users
 export const getAllUsers = async (_req: Request, res: Response) => {
+  console.log("Entering getAllUsers endpoint");
   try {
     const users = await User.findAll({
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] },
     });
-    res.json(users);
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    console.log("Fetched users:", users); // Log fetched users for debugging
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ message: (error as Error).message });
   }
 };
 
@@ -37,7 +40,7 @@ export const createUser = async (req: Request, res: Response) => {
     const newUser = await User.create({ username, password });
     res.status(201).json(newUser);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: (error as Error).message });
   }
 };
 

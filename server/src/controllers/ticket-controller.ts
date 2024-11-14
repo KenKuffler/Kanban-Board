@@ -4,19 +4,16 @@ import { User } from '../models/user.js';
 
 // GET /tickets
 export const getAllTickets = async (_req: Request, res: Response) => {
+  console.log("Entering getAllTickets endpoint"); // Log endpoint entry
   try {
     const tickets = await Ticket.findAll({
-      include: [
-        {
-          model: User,
-          as: 'assignedUser', // This should match the alias defined in the association
-          attributes: ['username'], // Include only the username attribute
-        },
-      ],
+      include: [{ model: User, as: 'assignedUser', attributes: ['username'] }],
     });
-    res.json(tickets);
-  } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    console.log("Fetched tickets:", tickets); // Log fetched tickets
+    res.status(200).json(tickets); // Ensure tickets are sent as JSON
+  } catch (error) {
+    console.error("Error fetching tickets:", error);
+    res.status(500).json({ error: 'Failed to fetch tickets' });
   }
 };
 
