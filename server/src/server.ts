@@ -28,7 +28,8 @@ app.use(cors({
 app.use(express.static('../client/dist'));
 
 app.use(express.json());
-app.use(routes);
+app.use('/api', routes);
+
 
 sequelize.sync({force: forceDatabaseRefresh}).then(() => {
   app.listen(PORT, () => {
