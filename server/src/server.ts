@@ -1,5 +1,5 @@
 import express from 'express';
-import routes from './routes/index.js'; // Import routes with default export
+import { authRoutes, apiRoutes } from './routes/index.js'; // Destructure imports for authRoutes and apiRoutes
 import { sequelize } from './models/index.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -23,14 +23,15 @@ app.use(express.static(path.join(path.resolve(), '../client/dist')));
 app.use(express.json());
 
 // Apply separated routes
-app.use('/auth', routes.authRoutes); // Attach authentication routes
-app.use('/api', routes.apiRoutes);   // Attach API routes with required authentication
+app.use('/auth', authRoutes); // Attach authentication routes
+app.use('/api', apiRoutes);   // Attach API routes with required authentication
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
   });
 });
+
 
 
 
