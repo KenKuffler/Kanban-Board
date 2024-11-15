@@ -45,5 +45,5 @@ router.delete('/:id', (req, res) => {
   deleteTicket(req, res);
 });
 
-export { router as ticketRouter };
+export { router as ticketRoutes };
 

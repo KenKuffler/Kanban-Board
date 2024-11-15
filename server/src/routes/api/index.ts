@@ -1,20 +1,20 @@
 // api/index.ts
 
 import { Router } from 'express';
-import { ticketRouter } from './ticket-routes.js';
-import { userRouter } from './user-routes.js';
+import { ticketRoutes } from './ticket-routes.js';
+import { userRoutes } from './user-routes.js';
 
 const router = Router();
 
 router.use('/tickets', (_req, _res, next) => {
   console.log('Request received at /api/tickets');
   next();
-}, ticketRouter);
+}, ticketRoutes);
 
 router.use('/users', (_req, _res, next) => {
   console.log('Request received at /api/users');
   next();
-}, userRouter);
+}, userRoutes);
 
 export default router;
 

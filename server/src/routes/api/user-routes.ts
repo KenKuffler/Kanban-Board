@@ -39,5 +39,5 @@ router.delete('/:id', (req, res) => {
   deleteUser(req, res);
 });
 
-export { router as userRouter };
+export { router as userRoutes };
 
