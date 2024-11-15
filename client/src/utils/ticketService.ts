@@ -3,7 +3,8 @@ import { TicketData } from '../interfaces/TicketData';
 import { ApiMessage } from '../interfaces/ApiMessage';
 import Auth from './auth';
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "https://kanban-board-bqdl.onrender.com"; // Replace with your API base URL directly
+
 
 // Function to retrieve all tickets
 export const retrieveTickets = async (): Promise<TicketData[]> => {

@@ -16,7 +16,7 @@ app.use(cors({
   origin: allowedOrigins,
   credentials: true,
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
+  allowedHeaders: ['Content-Type', 'Authorization'], // Add Authorization here
 }));
 
 app.use(express.static(path.join(path.resolve(), '../client/dist')));
@@ -24,7 +24,11 @@ app.use(express.json());
 
 // Apply separated routes
 app.use('/auth', authRoutes); // Attach authentication routes
-app.use('/api', apiRoutes);   // Attach API routes with required authentication
+app.use('/api', (req, _res, next) => {
+  console.log(`API Request Received: ${req.method} ${req.url}`); // Log API requests
+  next();
+});
+app.use('/api', apiRoutes); // Attach API routes
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
